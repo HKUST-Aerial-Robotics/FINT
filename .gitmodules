@@ -1,0 +1,3 @@
+[submodule "vins_multi"]
+	path = vins_multi
+	url = https://github.com/HKUST-Aerial-Robotics/VINS-Multi.git
