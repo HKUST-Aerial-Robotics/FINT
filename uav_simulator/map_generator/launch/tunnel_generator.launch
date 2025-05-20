@@ -1,0 +1,8 @@
+<launch>
+    <arg name="way_pt_path" default = "$(find map_generator)/resource/tunnel_way_pts_right_angle.csv" />
+	<arg name="pcd_output_path" default = "$(find map_generator)/resource/tunnel_pcd" />
+
+    <node name="tunnel_generator" pkg="map_generator" type="tunnel_generator" args="$(arg way_pt_path) $(arg pcd_output_path)" output="screen">
+    </node>
+
+</launch>

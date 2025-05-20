@@ -1,0 +1,5 @@
+<launch>
+    <node name="tunnel_rviz" pkg="rviz" type="rviz" output="log" args="-d $(find tunnel_planner)/config/tunnel_sim.rviz">
+        <remap from="/move_base_simple/goal" to="/traj_start_trigger"/>
+    </node>
+</launch>

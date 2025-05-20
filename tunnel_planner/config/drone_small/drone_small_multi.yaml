@@ -1,0 +1,321 @@
+%YAML:1.0
+
+#----map parameters----
+
+map_res: 0.04
+
+xmin: -2.0
+xmax: 13.0
+ymin: -3.0
+ymax: 10.0
+zmin: -1.0
+zmax: 4.0
+
+local_edf_xmin: -0.5
+local_edf_xmax: 3.0
+local_edf_ymin: -1.2
+local_edf_ymax: 1.2
+local_edf_zmin: -1.2
+local_edf_zmax: 1.2
+
+#----drone parameters-----
+drone_dimension: 0.30
+
+#----tunnel parameters----
+max_tunnel_dimension: 0.95
+cross_section_step_res: 0.15
+tunnel_step_res: 0.05
+tunnel_way_pt_min_interval: 0.5
+grad_max_res: 4e-4
+plan_range: 2.0
+flight_speed: 0.6
+virtual_flight_progress_speed: 1.0
+max_yaw_dir_curvature_ratio: 3.5
+yaw_ahead_length: 2.0
+
+max_yaw_change_over_distance: 150.0 # in deg/m
+max_yaw_center_line_dir_diff: 110.0 # in deg
+
+
+max_speed: 2.5
+max_acc: 0.5
+
+adaptive_speed: 1
+
+# hough_circle_threshold: 800.0
+hough_circle_threshold: 40.0
+# hough_rectangle_threshold: 12.0
+hough_rectangle_threshold: 70.0
+vert_section_cos_threshold: 0.95
+
+tunnel_entrance_x: 2.0
+tunnel_entrance_y: 0.0
+tunnel_entrance_z: 0.3
+tunnel_entrance_dir_x: 1.0
+tunnel_entrance_dir_y: 0.0
+tunnel_entrance_dir_z: 0.0
+
+#----net file----
+circle_net_file: circle_net.yaml
+rect_net_file: rect_net.yaml
+classifier_file: classifier_net.yaml
+
+#----optical flow calculation parameters----
+optical_flow_cal_res: 80
+
+#----opt parameters----
+quad_algorithm_id: 11
+# non_quad_algorithm_id: 25
+# non_quad_algorithm_id: 34
+non_quad_algorithm_id: 11
+
+bspline_degree: 3
+
+w_smooth_3d: 1.0
+w_smooth_1d_jerk: 5.0
+w_smooth_1d_acc: 1.0
+w_smooth_yaw: 1.0
+w_interval: 2.0
+w_dist: 4.0
+w_feasi: 3.0
+w_start: 100.0
+w_end: 0.5
+w_end_hard: 100.0 
+w_guide: 2.0
+w_waypt: 4.0
+w_time: 0.1
+w_disturbance: 5.0
+w_vision: 50.0
+w_yaw_waypt: 100.0
+
+w_heuristic: 1.0
+
+distance_cost_origin: 0.22
+
+max_iteration_num1: 500
+max_iteration_num2: 500
+max_iteration_num3: 200
+max_iteration_num4: 200
+
+max_iteration_time1: 0.005
+max_iteration_time2: 0.015
+max_iteration_time3: 0.003
+max_iteration_time4: 0.003
+
+replan_freq: 10
+time_commit: 0.1
+use_exact_time_sync: 0
+
+#----projection parameters----
+
+depth_margin: 1  # in pixel
+num_pixel_skip: 1
+min_depth: 0.2  # in meter
+max_depth: 5.0  # in meter
+depth_scale: 0.001 # in meter
+max_ray_length: 4.9 # in meter
+# fx: 229.033203125
+# fy: 228.599609375
+# cx: 157.03125
+# cy: 126.625
+
+#fx: 457.40234375
+#fy: 457.19921875
+#cx: 314.08203125
+#cy: 253.75
+
+cam_module:
+    num: 1
+    modules:
+      
+      - cam_id: 551
+        image0_topic: "/camera1/color/image_raw"
+        image1_topic: "/camera1/aligned_depth_to_color/image_raw"
+        depth_topic: "/camera1/depth/image_rect_raw"
+        cam_pose_topic: "/vins_multi_rgbd/imu_propagate_camera_pose_1"
+        latest_cam_pose_topic: "/vins_multi_rgbd/imu_propagate_camera_pose_1"
+
+        image_width: 640
+        image_height: 480
+
+        cam_fx: 6.0554248800280959e+02
+        cam_fy: 6.0437374784533949e+02
+        cam_cx: 3.2879050085628273e+02
+        cam_cy: 2.5905360587793410e+02
+
+        cam_k1: 1.1697086784999564e-01
+        cam_k2: -2.4789751251434247e-01
+        cam_p1: -6.1498719109314088e-05
+        cam_p2: -6.3265800306023775e-04
+
+        depth_fx: 228.041015625
+        depth_fy: 228.791015625
+        depth_cx: 159.189453125
+        depth_cy: 127.69140625
+
+        # depth_fx: 731.0390625
+        # depth_fy: 732.7734375
+        # depth_cx: 510.08984375
+        # depth_cy: 410.73828125
+
+
+        imu_T_cam: !!opencv-matrix
+            rows: 4
+            cols: 4
+            dt: d
+            data: [ -6.2808897687528287e-02, -2.8288204289201400e-03,
+                9.9802156296658184e-01, 9.9190815643999171e-02,
+                -2.9479336054914120e-02, -9.9955439454256156e-01,
+                -4.6884001978471689e-03, 9.6933771765262540e-03,
+                9.9759010175374097e-01, -2.9715486293087266e-02,
+                6.2697517951879722e-02, 5.9663428958918324e-03, 0., 0., 0., 1. ]
+
+        cam_R_depth: !!opencv-matrix
+            rows: 3
+            cols: 3
+            dt: d
+            data: [ 0.9999122619628906, 0.011549518443644047, 0.006487501319497824,
+                -0.011723578907549381, 0.9995539784431458, 0.0274655818939209,
+                -0.006167393643409014, -0.02753922902047634, 0.9996017217636108 ]
+
+        cam_t_depth: !!opencv-matrix
+                rows: 3
+                cols: 1
+                dt: d
+                data: [ -0.0002523650473449379, 0.013883611187338829, -0.005866215098649263 ]
+
+      - cam_id: 1148
+        image0_topic: "/camera2/color/image_raw"
+        image1_topic: "/camera2/aligned_depth_to_color/image_raw"
+        depth_topic: "/camera2/depth/image_rect_raw"
+        cam_pose_topic: "/vins_multi_rgbd/camera_pose_2"
+        latest_cam_pose_topic: "/vins_multi_rgbd/imu_propagate_camera_pose_2"
+
+        image_width: 640
+        image_height: 480
+
+        cam_fx: 6.1390667145503028e+02
+        cam_fy: 6.1280489851651760e+02
+        cam_cx: 3.2641309464961381e+02
+        cam_cy: 2.4049650143541373e+02
+
+        cam_k1: 1.2312162220227527e-01
+        cam_k2: -2.6067012089409480e-01
+        cam_p1: 4.8484506363572985e-05
+        cam_p2: -1.0133435374313753e-03
+
+        depth_fx: 228.337890625
+        depth_fy: 228.203125
+        depth_cx: 154.294921875
+        depth_cy: 127.029296875
+
+        # depth_fx: 731.203125
+        # depth_fy: 732.015625
+        # depth_cx: 524.421875
+        # depth_cy: 378.1484375
+
+        imu_T_cam: !!opencv-matrix
+            rows: 4
+            cols: 4
+            dt: d
+            data: [ 9.9952809850561897e-01, -7.7987928673327652e-03,
+                2.9711262638176063e-02, 4.8597909978628749e-04,
+                7.0450528870193395e-03, 9.9965280762388886e-01,
+                2.5389593133720322e-02, 1.3369115718638311e-02,
+                -2.9898955292139186e-02, -2.5168294330152712e-02,
+                9.9923601287831365e-01, 2.9478059181780079e-02, 0., 0., 0., 1. ]
+
+        cam_R_depth: !!opencv-matrix
+            rows: 3
+            cols: 3
+            dt: d
+            data: [ 0.9999960660934448, 0.002744808793067932, 0.000584874302148819,
+                -0.002759025665000081, 0.9996612668037415, 0.025878334417939186,
+                -0.0005136451218277216, -0.02587984688580036, 0.9996649026870728 ]
+
+        cam_t_depth: !!opencv-matrix
+                rows: 3
+                cols: 1
+                dt: d
+                data: [ -0.00017001510423142463, 0.01371533703058958, -0.005783965345472097 ]
+
+      - cam_id: 1039
+        image0_topic: "/camera3/color/image_raw"
+        image1_topic: "/camera3/aligned_depth_to_color/image_raw"
+        depth_topic: "/camera3/depth/image_rect_raw"
+        cam_pose_topic: "/vins_multi_rgbd/camera_pose_3"
+        latest_cam_pose_topic: "/vins_multi_rgbd/imu_propagate_camera_pose_3"
+
+        image_width: 640
+        image_height: 480
+
+        cam_fx: 6.0585626074781169e+02
+        cam_fy: 6.0498366473561168e+02
+        cam_cx: 3.3228445162094607e+02
+        cam_cy: 2.4078142797420495e+02
+
+        cam_k1: 1.1065928876520299e-01
+        cam_k2: -2.3573292440452850e-01
+        cam_p1: -3.1881134662899133e-05
+        cam_p2: -1.0260271747447166e-03
+
+        depth_fx: 230.59765625
+        depth_fy: 231.40625
+        depth_cx: 152.251953125
+        depth_cy: 123.35546875
+
+
+        # depth_fx: 738.828125
+        # depth_fy: 739.421875
+        # depth_cx: 476.80859375
+        # depth_cy: 390.953125
+
+        imu_T_cam: !!opencv-matrix
+            rows: 4
+            cols: 4
+            dt: d
+            data: [ 9.9991641582930035e-01, -5.0815285507388088e-03,
+                1.1888625768932126e-02, 6.0879836639510346e-02,
+                -4.6896906571882568e-03, -9.9945231238558307e-01,
+                -3.2757931385404088e-02, 1.3680113485164757e-02,
+                1.2048574879444118e-02, 3.2699439363680041e-02,
+                -9.9939260478986713e-01, -4.0997369314525207e-02, 0., 0., 0., 1. ]
+
+
+        cam_R_depth: !!opencv-matrix
+            rows: 3
+            cols: 3
+            dt: d
+            data: [ 0.9999952912330627, 0.001519518904387951, -0.002668675035238266,
+                -0.001456550438888371, 0.9997241497039795, 0.023440944030880928,
+                0.0027035577222704887, -0.02343694679439068, 0.9997216463088989 ]
+
+        cam_t_depth: !!opencv-matrix
+                rows: 3
+                cols: 1
+                dt: d
+                data: [ 0.0005826795822940767, 0.013923906721174717, -0.004339766688644886 ]
+
+#----fusion parameters----
+
+prob_hit: 0.8
+prob_miss: 0.3
+clamp_min: 0.25
+clamp_max: 0.95
+min_occupancy: 0.8
+
+#--------------------------
+update_freq: 15
+
+#----markers----
+markers:
+    marker_size: 0.0915
+    required_sample: 100
+    output_min_sample: 50
+    pos_tol: 0.01
+    inlayer_tol: 0.5
+    ids:
+      - id: 4
+      - id: 9
+      - id: 16
+      - id: 19

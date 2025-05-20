@@ -1,0 +1,259 @@
+%YAML:1.0
+
+#----map parameters----
+
+map_res: 0.04
+
+xmin: -5.0
+xmax: 13.0
+ymin: -5.0
+ymax: 8.5
+zmin: -1.0
+zmax: 4.0
+
+local_edf_xmin: -0.5
+local_edf_xmax: 3.0
+local_edf_ymin: -1.2
+local_edf_ymax: 1.2
+local_edf_zmin: -1.2
+local_edf_zmax: 1.2
+
+#----drone parameters-----
+drone_dimension: 0.30
+
+#----tunnel parameters----
+max_tunnel_dimension: 1.0
+cross_section_step_res: 0.15
+tunnel_step_res: 0.05
+tunnel_way_pt_min_interval: 0.5
+grad_max_res: 4e-4
+plan_range: 1.8
+flight_speed: 1.5
+virtual_flight_progress_speed: 1.0
+max_yaw_dir_curvature_ratio: 3.5
+yaw_ahead_length: 2.0
+
+max_yaw_change_over_distance: 150.0 # in deg/m
+max_yaw_center_line_dir_diff: 110.0 # in deg
+
+max_speed: 2.5
+max_acc: 0.5
+
+adaptive_speed: 1
+
+hough_circle_threshold: 40.0
+hough_rectangle_threshold: 70.0
+vert_section_cos_threshold: 0.95
+
+tunnel_entrance_x: 2.0
+tunnel_entrance_y: 0.0
+tunnel_entrance_z: 0.3
+tunnel_entrance_dir_x: 1.0
+tunnel_entrance_dir_y: 0.0
+tunnel_entrance_dir_z: 0.0
+
+#----net file----
+circle_net_file: circle_net.yaml
+rect_net_file: rect_net.yaml
+classifier_file: classifier_net.yaml
+
+#----optical flow calculation parameters----
+optical_flow_cal_res: 80
+
+#----opt parameters----
+quad_algorithm_id: 11
+# non_quad_algorithm_id: 25
+# non_quad_algorithm_id: 34
+non_quad_algorithm_id: 11
+
+bspline_degree: 3
+
+w_smooth_3d: 1.0
+w_smooth_1d_jerk: 5.0
+w_smooth_1d_acc: 1.0
+w_smooth_yaw: 1.0
+w_interval: 2.0
+w_dist: 4.0
+w_feasi: 3.0
+w_start: 100.0
+w_end: 0.5
+w_end_hard: 100.0 
+w_guide: 2.0
+w_waypt: 4.0
+w_time: 0.1
+w_disturbance: 5.0
+w_vision: 50.0
+w_yaw_waypt: 100.0
+
+w_heuristic: 1.0
+
+distance_cost_origin: 0.22
+
+max_iteration_num1: 500
+max_iteration_num2: 500
+max_iteration_num3: 200
+max_iteration_num4: 200
+
+max_iteration_time1: 0.005
+max_iteration_time2: 0.015
+max_iteration_time3: 0.003
+max_iteration_time4: 0.003
+
+replan_freq: 10
+time_commit: 0.1
+use_exact_time_sync: 1
+
+#----projection parameters----
+
+depth_margin: 1  # in pixel
+num_pixel_skip: 1
+min_depth: 0.001  # in meter
+max_depth: 5.0  # in meter
+depth_scale: 0.001 # in meter
+max_ray_length: 4.9 # in meter
+
+
+cam_module:
+    num: 3
+    modules:
+      
+      - cam_id: 1994
+        depth_topic: "/pcl_render_node/depth_0"
+        cam_pose_topic: "/pcl_render_node/sensor_pose0"
+
+        image_width: 640
+        image_height: 480
+
+        cam_fx: 6.1031780857439810e+02
+        cam_fy: 6.0948446573651597e+02
+        cam_cx: 3.2891014965107001e+02
+        cam_cy: 2.3919117869561677e+02
+        depth_fx: 457.40234375
+        depth_fy: 457.19921875
+        depth_cx: 314.08203125
+        depth_cy: 253.75
+        # depth_fx: 229.033203125
+        # depth_fy: 228.599609375
+        # depth_cx: 157.03125
+        # depth_cy: 126.625
+
+        imu_T_cam: !!opencv-matrix
+            rows: 4
+            cols: 4
+            dt: d
+            data: [ 0.0, 0.0,
+                1.0, 0.0,
+                0.0, -1.0,
+                0.0, 0.0,
+                1.0, 0.0,
+                0.0, 0.0, 0., 0., 0., 1. ]
+
+        cam_R_depth: !!opencv-matrix
+            rows: 3
+            cols: 3
+            dt: d
+            data: [ 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 ]
+
+        cam_t_depth: !!opencv-matrix
+                rows: 3
+                cols: 1
+                dt: d
+                data: [ 0.0, 0.0, 0.0 ]
+
+      - cam_id: 1039
+        depth_topic: "/pcl_render_node/depth_1"
+        cam_pose_topic: "/pcl_render_node/sensor_pose1"
+
+        image_width: 640
+        image_height: 480
+
+        cam_fx: 6.1031780857439810e+02
+        cam_fy: 6.0948446573651597e+02
+        cam_cx: 3.2891014965107001e+02
+        cam_cy: 2.3919117869561677e+02
+        depth_fx: 457.40234375
+        depth_fy: 457.19921875
+        depth_cx: 314.08203125
+        depth_cy: 253.75
+        # depth_fx: 229.033203125
+        # depth_fy: 228.599609375
+        # depth_cx: 157.03125
+        # depth_cy: 126.625
+
+        imu_T_cam: !!opencv-matrix
+            rows: 4
+            cols: 4
+            dt: d
+            data: [ 1.0, 0.0,
+                0.0, 0.0,
+                0.0, 1.0,
+                0.0, 0.0,
+                0.0, 0.0,
+                1.0, 0.0, 0., 0., 0., 1. ]
+
+
+        cam_R_depth: !!opencv-matrix
+            rows: 3
+            cols: 3
+            dt: d
+            data: [ 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 ]
+
+        cam_t_depth: !!opencv-matrix
+                rows: 3
+                cols: 1
+                dt: d
+                data: [ 0.0, 0.0, 0.0 ]
+
+      - cam_id: 1148
+        depth_topic: "/pcl_render_node/depth_2"
+        cam_pose_topic: "/pcl_render_node/sensor_pose2"
+
+        image_width: 640
+        image_height: 480
+
+        cam_fx: 6.1031780857439810e+02
+        cam_fy: 6.0948446573651597e+02
+        cam_cx: 3.2891014965107001e+02
+        cam_cy: 2.3919117869561677e+02
+        depth_fx: 457.40234375
+        depth_fy: 457.19921875
+        depth_cx: 314.08203125
+        depth_cy: 253.75
+        # depth_fx: 229.033203125
+        # depth_fy: 228.599609375
+        # depth_cx: 157.03125
+        # depth_cy: 126.625
+
+        imu_T_cam: !!opencv-matrix
+            rows: 4
+            cols: 4
+            dt: d
+            data: [ 0.0, 1.0,
+                0.0, 0.0,
+                -1.0, 0.0,
+                0.0, 0.0,
+                0.0, 0.0,
+                -1.0, 0.0, 0., 0., 0., 1. ]
+
+        cam_R_depth: !!opencv-matrix
+            rows: 3
+            cols: 3
+            dt: d
+            data: [ 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 ]
+
+        cam_t_depth: !!opencv-matrix
+                rows: 3
+                cols: 1
+                dt: d
+                data: [ 0.0, 0.0, 0.0 ]
+
+#----fusion parameters----
+
+prob_hit: 0.8
+prob_miss: 0.3
+clamp_min: 0.25
+clamp_max: 0.95
+min_occupancy: 0.8
+
+#--------------------------
+update_freq: 15

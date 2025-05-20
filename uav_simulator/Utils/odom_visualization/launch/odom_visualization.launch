@@ -1,0 +1,121 @@
+<launch>
+
+  <node pkg="odom_visualization" name="odom_visualization" type="odom_visualization" output="screen">
+    <!-- <remap from="~odom" to="/Proposed"/> -->
+    <remap from="~odom" to="/vins_multi_rgbd/imu_propagate"/>
+    <!-- <remap from="~sub_pose" to="/Proposed"/> -->
+    <param name="color/a" value="1.0"/>    
+    <param name="color/r" value="0.0"/>        
+    <param name="color/g" value="0.0"/>        
+    <param name="color/b" value="1.0"/>       
+    <param name="covariance_scale" value="100.0"/>       
+    <param name="robot_scale" value="1.0"/>
+
+    <param name="odom_tf_q_w" value="1.0"/>
+    <param name="odom_tf_q_x" value="0.0"/>
+    <param name="odom_tf_q_y" value="0.0"/>
+    <param name="odom_tf_q_z" value="0.0"/>
+
+    <param name="odom_tf_t_x" value="0.0"/>
+    <param name="odom_tf_t_y" value="0.0"/>
+    <param name="odom_tf_t_z" value="0.0"/>
+
+    <!-- <param name="odom_tf_q_w" value="0.7029232"/>
+    <param name="odom_tf_q_x" value="0.0139627"/>
+    <param name="odom_tf_q_y" value="-0.0073433"/>
+    <param name="odom_tf_q_z" value="-0.7110907"/>
+
+    <param name="odom_tf_t_x" value="-1.05371201"/>
+    <param name="odom_tf_t_y" value="-3.72135621"/>
+    <param name="odom_tf_t_z" value="-0.04434977"/> -->
+
+    <!-- <param name="odom_tf_q_w" value="9.99846957e-01"/>
+    <param name="odom_tf_q_x" value="1.49313451e-02"/>
+    <param name="odom_tf_q_y" value="-4.13065096e-04"/>
+    <param name="odom_tf_q_z" value="-9.10750469e-03"/>
+
+
+    <param name="odom_tf_t_x" value="-0.29258253"/>
+    <param name="odom_tf_t_y" value="-0.0842831"/>
+    <param name="odom_tf_t_z" value="-0.02775533"/> -->
+        
+  </node>
+
+  <node pkg="odom_visualization" name="odom_visualization_cmp" type="odom_visualization" output="screen">
+    <!-- <remap from="~odom" to="/Front"/> -->
+    <!-- <remap from="~odom" to="/vins_estimator/imu_propagate"/> -->
+    <!-- <remap from="~odom" to="/vins_fusion/imu_propagate"/> -->
+    <!-- <remap from="~sub_pose" to="/Front"/> -->
+    <remap from="~sub_pose" to="/WO_feature_allocation"/>
+
+    
+    <param name="color/a" value="1.0"/>    
+    <param name="color/r" value="0.0"/>        
+    <param name="color/g" value="0.0"/>        
+    <param name="color/b" value="1.0"/>       
+    <param name="covariance_scale" value="100.0"/>       
+    <param name="robot_scale" value="1.0"/>
+
+    <!-- <param name="odom_tf_q_w" value="1.0"/>
+    <param name="odom_tf_q_x" value="0.0"/>
+    <param name="odom_tf_q_y" value="0.0"/>
+    <param name="odom_tf_q_z" value="0.0"/>
+
+    <param name="odom_tf_t_x" value="0.0"/>
+    <param name="odom_tf_t_y" value="0.0"/>
+    <param name="odom_tf_t_z" value="0.0"/>
+
+    <param name="odom_tf_q_w" value="0.7029232"/>
+    <param name="odom_tf_q_x" value="0.0139627"/>
+    <param name="odom_tf_q_y" value="-0.0073433"/>
+    <param name="odom_tf_q_z" value="-0.7110907"/>
+
+    <param name="odom_tf_t_x" value="-1.05371201"/>
+    <param name="odom_tf_t_y" value="-3.72135621"/>
+    <param name="odom_tf_t_z" value="-0.04434977"/> -->
+
+    <param name="odom_tf_q_w" value="9.99846957e-01"/>
+    <param name="odom_tf_q_x" value="1.49313451e-02"/>
+    <param name="odom_tf_q_y" value="-4.13065096e-04"/>
+    <param name="odom_tf_q_z" value="-9.10750469e-03"/>
+
+    <param name="odom_tf_t_x" value="-0.29258253"/>
+    <param name="odom_tf_t_y" value="-0.0842831"/>
+    <param name="odom_tf_t_z" value="-0.02775533"/>
+
+
+        
+  </node>
+
+  <node pkg="odom_visualization" name="odom_visualization_gt" type="odom_visualization" output="screen">
+    <!-- <remap from="~odom" to="/GT"/> -->
+    <remap from="~sub_pose" to="/GT"/>
+    <param name="color/a" value="1.0"/>    
+    <param name="color/r" value="0.0"/>        
+    <param name="color/g" value="0.0"/>        
+    <param name="color/b" value="1.0"/>       
+    <param name="covariance_scale" value="100.0"/>       
+    <param name="robot_scale" value="1.0"/>
+
+    <param name="odom_tf_q_w" value="1.0"/>
+    <param name="odom_tf_q_x" value="0.0"/>
+    <param name="odom_tf_q_y" value="0.0"/>
+    <param name="odom_tf_q_z" value="0.0"/>
+
+    <param name="odom_tf_t_x" value="0.0"/>
+    <param name="odom_tf_t_y" value="0.0"/>
+    <param name="odom_tf_t_z" value="0.0"/>
+
+    <!-- <param name="odom_tf_q_w" value="9.99846957e-01"/>
+    <param name="odom_tf_q_x" value="-1.49313451e-02"/>
+    <param name="odom_tf_q_y" value="4.13065096e-04"/>
+    <param name="odom_tf_q_z" value="9.10750469e-03"/>
+
+    <param name="odom_tf_t_x" value="0.29101325"/>
+    <param name="odom_tf_t_y" value="0.09038544"/>
+    <param name="odom_tf_t_z" value="0.02490579"/> -->
+
+        
+  </node>
+
+</launch>

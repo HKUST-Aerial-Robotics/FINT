@@ -1,0 +1,32 @@
+<launch>
+
+    <node pkg="tunnel_planner" type="tunnel_planner" name="tunnel_planner" output="screen" args="$(find tunnel_planner)/config/drone_small/drone_small_multi.yaml">
+        <!-- <remap from="~/occ_map" to="/local_occ_map/occ_map"/>
+        <remap from="~/free_map" to="/local_occ_map/free_map"/> -->
+        <remap from="~/odom" to="/vins_multi_rgbd/odometry"/>
+        <remap from="~/latest_odom" to="/vins_multi_rgbd/imu_propagate"/>
+        <remap from="~/plan_trigger" to="/traj_start_trigger"/>
+        <remap from="~/traj_state" to="/px4ctrl/traj_state"/>
+        <remap from="~/tunnel_entrance" to="/marker_detector/mean_pose"/>
+    </node>
+
+    <node pkg="tunnel_planner" type="b_spline_traj_server" name="b_spline_traj_server" output="screen">
+        <remap from="/bspline_traj" to="/tunnel_planner/traj_full"/>
+        <remap from="/odom" to="/vins_multi_rgbd/imu_propagate"/>
+        <!-- <remap from="/position_cmd" to="/position_cmd"/> -->
+        <!-- <remap from="/position_cmd" to="/planning/pos_cmd"/> -->
+        <remap from="/pg_T_vio" to="/loop_fusion/pg_T_vio"/>
+
+        <param name="traj_server/pub_traj_id" value="10" type="int"/>
+        <param name="traj_server/isLoopCorrection" value="false" type="bool"/>
+    </node>
+
+
+    <node pkg="marker_detector" type="marker_detector" name="marker_detector" output="screen">
+        <param name= "config_file" type="string" value="$(find tunnel_planner)/config/drone_small/drone_small_multi.yaml"/>
+        <remap from="~detect_trigger" to="/traj_start_trigger"/>
+    </node>
+
+
+</launch>
+
